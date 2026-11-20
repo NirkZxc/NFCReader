@@ -24,7 +24,15 @@ jobs:
         uses: android-actions/setup-android@v3
         with:
           sdk: 37
-          packages: 'platform-tools build-tools;37.0.0 platforms;android-37'
+          packages: 'platform-tools build-tools;37.0.0 platforms;android-37.0'
+
+      - name: Normalize Android 17 SDK platform directory
+        run: |
+          SDK_ROOT="${ANDROID_SDK_ROOT:-$ANDROID_HOME}"
+          if [ -d "$SDK_ROOT/platforms/android-37.0" ] && [ ! -e "$SDK_ROOT/platforms/android-37" ]; then
+            ln -s android-37.0 "$SDK_ROOT/platforms/android-37"
+          fi
+          test -d "$SDK_ROOT/platforms/android-37"
 
       - name: Validate Gradle wrapper
         uses: gradle/actions/wrapper-validation@v6

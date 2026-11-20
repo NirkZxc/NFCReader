@@ -27,7 +27,7 @@ jobs:
           packages: build-tools;37.0.0,platforms;android-37
 
       - name: Validate Gradle wrapper
-        uses: gradle/wrapper-validation-action@v4
+        uses: gradle/actions/wrapper-validation@v6
 
       - name: Build debug APK
         run: ./gradlew assembleDebug
